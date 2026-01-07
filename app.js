@@ -74,6 +74,85 @@ class GestionAgents {
 
 // Exporter pour utilisation globale
 window.GestionAgents = GestionAgents;
+// Initialiser la gestion des agents
+const gestionAgents = new GestionAgents();
+
+// Fonction pour ajouter un agent
+function ajouterAgent() {
+    const code = document.getElementById('agent-code').value;
+    const nom = document.getElementById('agent-nom').value;
+    const prenom = document.getElementById('agent-prenom').value;
+    const groupe = document.getElementById('agent-groupe').value;
+    
+    if (!code || !nom || !groupe) {
+        alert('Veuillez remplir tous les champs obligatoires');
+        return;
+    }
+    
+    const agent = gestionAgents.ajouterAgent(code, nom, prenom, groupe);
+    afficherNotification(`Agent ${agent.code} ajouté avec succès !`, 'success');
+    
+    // Réinitialiser le formulaire
+    document.getElementById('agent-code').value = '';
+    document.getElementById('agent-nom').value = '';
+    document.getElementById('agent-prenom').value = '';
+    document.getElementById('agent-groupe').value = '';
+    
+    // Mettre à jour la liste
+    afficherAgents();
+}
+
+// Afficher la liste des agents
+function afficherAgents() {
+    const container = document.getElementById('liste-agents');
+    const agents = gestionAgents.listerAgents();
+    
+    if (agents.length === 0) {
+        container.innerHTML = '<p class="empty">Aucun agent enregistré</p>';
+        return;
+    }
+    
+    let html = '<div class="grid">';
+    
+    agents.forEach(agent => {
+        html += `
+            <div class="card agent-card">
+                <div class="agent-header">
+                    <h3>${agent.nom} ${agent.prenom}</h3>
+                    <span class="badge groupe-${agent.groupe}">${agent.groupe}</span>
+                </div>
+                <div class="agent-body">
+                    <p><strong>Code:</strong> ${agent.code}</p>
+                    <p><strong>Entrée:</strong> ${agent.dateEntree}</p>
+                </div>
+                <div class="agent-actions">
+                    <button onclick="modifierAgent('${agent.code}')" class="btn-small">✏️ Modifier</button>
+                    <button onclick="supprimerAgent('${agent.code}')" class="btn-small btn-danger">🗑️ Supprimer</button>
+                </div>
+            </div>
+        `;
+    });
+    
+    html += '</div>';
+    container.innerHTML = html;
+}
+
+// Fonctions utilitaires
+function afficherNotification(message, type = 'info') {
+    // Créer une notification simple
+    const notification = document.createElement('div');
+    notification.className = `notification notification-${type}`;
+    notification.textContent = message;
+    
+    document.body.appendChild(notification);
+    
+    setTimeout(() => notification.remove(), 3000);
+}
+
+// Initialiser l'affichage au chargement
+document.addEventListener('DOMContentLoaded', () => {
+    afficherAgents();
+});
 class PlanningApp {
     constructor() {
         this.db = window.PlanningDB;
