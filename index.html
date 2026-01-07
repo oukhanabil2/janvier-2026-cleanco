@@ -50,6 +50,29 @@
 
         <!-- Contenu Principal -->
         <main id="main-content">
+            <!-- Après le header, dans le main -->
+<section id="gestion-agents" class="section">
+    <h2>👥 Gestion des Agents</h2>
+    
+    <div class="form-container">
+        <input type="text" id="agent-code" placeholder="Code (ex: A01)" class="input">
+        <input type="text" id="agent-nom" placeholder="Nom" class="input">
+        <input type="text" id="agent-prenom" placeholder="Prénom" class="input">
+        <select id="agent-groupe" class="select">
+            <option value="">Choisir un groupe</option>
+            <option value="A">Groupe A</option>
+            <option value="B">Groupe B</option>
+            <option value="C">Groupe C</option>
+            <option value="D">Groupe D</option>
+            <option value="E">Groupe E</option>
+        </select>
+        <button onclick="ajouterAgent()" class="btn btn-primary">Ajouter Agent</button>
+    </div>
+    
+    <div id="liste-agents" class="liste-container">
+        <!-- Liste générée par JavaScript -->
+    </div>
+</section>
             <!-- Tableau de bord -->
             <section id="dashboard-tab" class="tab-content active">
                 <div class="dashboard-grid">
