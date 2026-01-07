@@ -1,3 +1,79 @@
+// === GESTION DES AGENTS (Version simplifiée) ===
+
+class GestionAgents {
+    constructor() {
+        this.agents = this.loadFromStorage() || [];
+    }
+    
+    // Ajouter un agent
+    ajouterAgent(code, nom, prenom, groupe) {
+        const agent = {
+            code: code.toUpperCase(),
+            nom: nom.trim(),
+            prenom: prenom.trim(),
+            groupe: groupe.toUpperCase(),
+            dateEntree: new Date().toISOString().split('T')[0],
+            statut: 'actif'
+        };
+        
+        // Vérifier si l'agent existe déjà
+        const existe = this.agents.find(a => a.code === agent.code);
+        
+        if (existe) {
+            // Mettre à jour
+            Object.assign(existe, agent);
+        } else {
+            // Ajouter
+            this.agents.push(agent);
+        }
+        
+        this.saveToStorage();
+        return agent;
+    }
+    
+    // Lister les agents
+    listerAgents(groupe = null) {
+        if (groupe) {
+            return this.agents.filter(a => a.groupe === groupe && a.statut === 'actif');
+        }
+        return this.agents.filter(a => a.statut === 'actif');
+    }
+    
+    // Modifier un agent
+    modifierAgent(code, nouvellesDonnees) {
+        const agent = this.agents.find(a => a.code === code.toUpperCase());
+        if (agent) {
+            Object.assign(agent, nouvellesDonnees);
+            this.saveToStorage();
+            return true;
+        }
+        return false;
+    }
+    
+    // Supprimer (marquer comme inactif)
+    supprimerAgent(code) {
+        const agent = this.agents.find(a => a.code === code.toUpperCase());
+        if (agent) {
+            agent.statut = 'inactif';
+            this.saveToStorage();
+            return true;
+        }
+        return false;
+    }
+    
+    // Stockage local
+    saveToStorage() {
+        localStorage.setItem('planning_agents', JSON.stringify(this.agents));
+    }
+    
+    loadFromStorage() {
+        const data = localStorage.getItem('planning_agents');
+        return data ? JSON.parse(data) : null;
+    }
+}
+
+// Exporter pour utilisation globale
+window.GestionAgents = GestionAgents;
 class PlanningApp {
     constructor() {
         this.db = window.PlanningDB;
