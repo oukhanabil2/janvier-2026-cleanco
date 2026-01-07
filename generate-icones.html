@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Générateur d'Icônes</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+            background: #f0f0f0;
+        }
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        button {
+            background: #2c3e50;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 18px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px;
+        }
+        .icon-preview {
+            width: 100px;
+            height: 100px;
+            background: #2c3e50;
+            color: white;
+            font-size: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 20px;
+            margin: 20px auto;
+        }
+        .download-link {
+            display: block;
+            margin: 10px;
+            padding: 10px;
+            background: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📱 Générateur d'Icônes PWA</h1>
+        
+        <div class="icon-preview">📅</div>
+        
+        <p>Cliquez pour générer et télécharger les icônes</p>
+        
+        <button onclick="generateAllIcons()">🎯 Générer Toutes les Icônes</button>
+        
+        <div id="download-links"></div>
+        
+        <p><small>Les icônes seront téléchargées dans votre dossier "Téléchargements"</small></p>
+    </div>
+
+    <script>
+        // Tailles requises pour PWA
+        const sizes = [
+            { size: 512, name: 'icon-512x512' },
+            { size: 384, name: 'icon-384x384' },
+            { size: 192, name: 'icon-192x192' },
+            { size: 152, name: 'icon-152x152' },
+            { size: 144, name: 'icon-144x144' },
+            { size: 128, name: 'icon-128x128' },
+            { size: 96, name: 'icon-96x96' },
+            { size: 72, name: 'icon-72x72' },
+            { size: 64, name: 'favicon' }
+        ];
+
+        function generateAllIcons() {
+            const linksDiv = document.getElementById('download-links');
+            linksDiv.innerHTML = '<h3>Téléchargement en cours...</h3>';
+            
+            sizes.forEach((icon, index) => {
+                setTimeout(() => {
+                    generateIcon(icon.size, icon.name);
+                    
+                    // Mettre à jour l'interface
+                    const link = document.createElement('a');
+                    link.href = generateIconDataURL(icon.size);
+                    link.download = `${icon.name}.png`;
+                    link.className = 'download-link';
+                    link.textContent = `📥 ${icon.name}.png (${icon.size}x${icon.size})`;
+                    link.click();
+                    
+                    linksDiv.appendChild(link);
+                    
+                    if (index === sizes.length - 1) {
+                        const complete = document.createElement('p');
+                        complete.innerHTML = '<strong>✅ Toutes les icônes ont été générées !</strong>';
+                        linksDiv.appendChild(complete);
+                    }
+                }, index * 300);
+            });
+        }
+
+        function generateIcon(size, name) {
+            // Créer un canvas pour dessiner l'icône
+            const canvas = document.createElement('canvas');
+            canvas.width = size;
+            canvas.height = size;
+            const ctx = canvas.getContext('2d');
+            
+            // Fond
+            ctx.fillStyle = '#2c3e50';
+            ctx.fillRect(0, 0, size, size);
+            
+            // Calendrier
+            ctx.fillStyle = '#ffffff';
+            
+            // Corps du calendrier
+            const padding = size * 0.1;
+            const calendarWidth = size - (padding * 2);
+            const calendarHeight = size - (padding * 2);
+            
+            // Rectangle principal
+            ctx.fillRect(padding, padding, calendarWidth, calendarHeight);
+            
+            // Mois (bande en haut)
+            ctx.fillStyle = '#3498db';
+            ctx.fillRect(padding, padding, calendarWidth, calendarHeight * 0.2);
+            
+            // Retour au blanc pour les jours
+            ctx.fillStyle = '#ffffff';
+            
+            // Grille de jours (5x7)
+            const daySize = calendarWidth / 7;
+            const startY = padding + (calendarHeight * 0.25);
+            
+            for (let row = 0; row < 5; row++) {
+                for (let col = 0; col < 7; col++) {
+                    const x = padding + (col * daySize) + (daySize * 0.1);
+                    const y = startY + (row * daySize);
+                    const dayW = daySize * 0.8;
+                    const dayH = daySize * 0.8;
+                    
+                    ctx.fillStyle = '#ecf0f1';
+                    ctx.fillRect(x, y, dayW, dayH);
+                }
+            }
+            
+            // Jour actuel en couleur
+            ctx.fillStyle = '#e74c3c';
+            const todayX = padding + (3 * daySize) + (daySize * 0.1);
+            const todayY = startY + (2 * daySize);
+            ctx.fillRect(todayX, todayY, daySize * 0.8, daySize * 0.8);
+            
+            // Convertir en URL de données
+            return canvas.toDataURL('image/png');
+        }
+
+        function generateIconDataURL(size) {
+            // Version simplifiée pour le téléchargement
+            const canvas = document.createElement('canvas');
+            canvas.width = size;
+            canvas.height = size;
+            const ctx = canvas.getContext('2d');
+            
+            // Fond
+            ctx.fillStyle = '#2c3e50';
+            ctx.fillRect(0, 0, size, size);
+            
+            // Texte/emoji (pour les petites tailles)
+            if (size >= 72) {
+                ctx.fillStyle = '#ffffff';
+                ctx.font = `bold ${size * 0.5}px Arial`;
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText('📅', size/2, size/2);
+            } else {
+                // Pour favicon, juste un P
+                ctx.fillStyle = '#3498db';
+                ctx.font = `bold ${size * 0.6}px Arial`;
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText('P', size/2, size/2);
+            }
+            
+            return canvas.toDataURL('image/png');
+        }
+    </script>
+</body>
+</html>

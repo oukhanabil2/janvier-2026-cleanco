@@ -1,0 +1,17 @@
+planning-offline-pwa/
+│
+├── index.html
+├── manifest.json
+├── service-worker.js
+├── style.css
+├── app.js
+├── database.js          # Gestion IndexedDB
+├── excel-import.js      # Importation Excel
+├── offline-manager.js   # Gestion synchronisation
+│
+├── lib/                # Bibliothèques
+│   ├── xlsx.full.min.js    # SheetJS pour Excel
+│   └── dexie.min.js        # IndexedDB wrapper
+│
+└── assets/
+    └── icons/
