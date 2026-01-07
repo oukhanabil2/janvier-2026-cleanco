@@ -498,3 +498,109 @@ main {
         padding: 20px;
     }
 }
+/* Styles pour la gestion des agents */
+.section {
+    margin: 30px 0;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.form-container {
+    display: grid;
+    gap: 10px;
+    max-width: 500px;
+    margin: 20px 0;
+}
+
+.input, .select {
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.btn-primary {
+    background: #3498db;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.btn-primary:hover {
+    background: #2980b9;
+}
+
+.liste-container {
+    margin-top: 30px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 15px;
+}
+
+.agent-card {
+    border: 1px solid #eee;
+    padding: 15px;
+    border-radius: 8px;
+}
+
+.agent-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.badge {
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: bold;
+    color: white;
+}
+
+.groupe-A { background: #3498db; }
+.groupe-B { background: #2ecc71; }
+.groupe-C { background: #e74c3c; }
+.groupe-D { background: #f39c12; }
+.groupe-E { background: #9b59b6; }
+
+.agent-actions {
+    margin-top: 10px;
+    display: flex;
+    gap: 5px;
+}
+
+.btn-small {
+    padding: 5px 10px;
+    font-size: 12px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.btn-danger {
+    background: #e74c3c;
+    color: white;
+}
+
+.notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 15px;
+    border-radius: 5px;
+    color: white;
+    z-index: 1000;
+}
+
+.notification-success { background: #27ae60; }
+.notification-error { background: #e74c3c; }
+.notification-info { background: #3498db; }
