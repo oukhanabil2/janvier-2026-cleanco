@@ -3,297 +3,199 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Planning Agents - Hors Ligne</title>
-    <link rel="manifest" href="manifest.json">
+    <title>Planning Agents - Développement</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="icon" href="assets/icons/favicon.ico">
+    <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#2c3e50">
 </head>
 <body>
     <div class="container">
-        <!-- En-tête -->
         <header>
-            <div class="header-left">
-                <h1>📅 Planning Agents</h1>
-                <div class="connection-status">
-                    <span id="connection-indicator" class="offline">● Hors ligne</span>
-                    <small id="last-sync">Dernière synchro: jamais</small>
-                </div>
-            </div>
-            <div class="header-right">
-                <button id="install-btn" class="btn-install">📲 Installer</button>
-                <button id="sync-btn" class="btn-sync">🔄 Sync</button>
-                <button id="export-btn" class="btn-export">📤 Exporter</button>
-            </div>
+            <h1>📱 Planning Agents DEV</h1>
+            <p class="dev-status">🔄 En développement : CRUD Agents | IndexedDB | Calcul Planning</p>
         </header>
 
-        <!-- Navigation -->
-        <nav class="main-nav">
-            <div class="nav-tabs">
-                <button class="nav-tab active" data-tab="dashboard">
-                    <span>🏠</span> Tableau
-                </button>
-                <button class="nav-tab" data-tab="planning">
-                    <span>📅</span> Planning
-                </button>
-                <button class="nav-tab" data-tab="agents">
-                    <span>👥</span> Agents
-                </button>
-                <button class="nav-tab" data-tab="import">
-                    <span>📊</span> Import
-                </button>
-                <button class="nav-tab" data-tab="stats">
-                    <span>📈</span> Stats
-                </button>
-            </div>
+        <nav class="dev-nav">
+            <button class="nav-btn active" data-section="agents">👥 CRUD Agents</button>
+            <button class="nav-btn" data-section="database">💾 IndexedDB</button>
+            <button class="nav-btn" data-section="planning">📅 Calcul Planning</button>
+            <button class="nav-btn" data-section="all">🚀 Tout Tester</button>
         </nav>
 
-        <!-- Contenu Principal -->
-        <main id="main-content">
-            <!-- Après le header, dans le main -->
-<section id="gestion-agents" class="section">
-    <h2>👥 Gestion des Agents</h2>
-    
-    <div class="form-container">
-        <input type="text" id="agent-code" placeholder="Code (ex: A01)" class="input">
-        <input type="text" id="agent-nom" placeholder="Nom" class="input">
-        <input type="text" id="agent-prenom" placeholder="Prénom" class="input">
-        <select id="agent-groupe" class="select">
-            <option value="">Choisir un groupe</option>
-            <option value="A">Groupe A</option>
-            <option value="B">Groupe B</option>
-            <option value="C">Groupe C</option>
-            <option value="D">Groupe D</option>
-            <option value="E">Groupe E</option>
-        </select>
-        <button onclick="ajouterAgent()" class="btn btn-primary">Ajouter Agent</button>
-    </div>
-    
-    <div id="liste-agents" class="liste-container">
-        <!-- Liste générée par JavaScript -->
-    </div>
-</section>
-            <!-- Tableau de bord -->
-            <section id="dashboard-tab" class="tab-content active">
-                <div class="dashboard-grid">
-                    <div class="stat-card">
-                        <h3>Agents Actifs</h3>
-                        <div class="stat-value" id="stat-agents">0</div>
-                    </div>
-                    <div class="stat-card">
-                        <h3>Shifts Ce Mois</h3>
-                        <div class="stat-value" id="stat-shifts">0</div>
-                    </div>
-                    <div class="stat-card">
-                        <h3>Radios Attribuées</h3>
-                        <div class="stat-value" id="stat-radios">0</div>
-                    </div>
-                    <div class="stat-card">
-                        <h3>Jours Travaillés</h3>
-                        <div class="stat-value" id="stat-days">0</div>
-                    </div>
-                </div>
-                
-                <div class="quick-actions">
-                    <h3>Actions Rapides</h3>
-                    <div class="action-buttons">
-                        <button class="action-btn" data-action="import-excel">
-                            <span>📁</span> Importer Excel
-                        </button>
-                        <button class="action-btn" data-action="add-agent">
-                            <span>➕</span> Nouvel Agent
-                        </button>
-                        <button class="action-btn" data-action="generate-planning">
-                            <span>🔧</span> Générer Planning
-                        </button>
-                        <button class="action-btn" data-action="view-reports">
-                            <span>📊</span> Rapports
-                        </button>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Planning -->
-            <section id="planning-tab" class="tab-content">
-                <div class="section-header">
-                    <h2>Planning Mensuel</h2>
-                    <div class="controls">
-                        <select id="planning-month">
-                            <!-- Généré par JavaScript -->
-                        </select>
-                        <select id="planning-group">
-                            <option value="all">Tous les groupes</option>
+        <main>
+            <!-- Section CRUD Agents -->
+            <section id="agents-section" class="dev-section active">
+                <h2>👥 CRUD Agents (En développement)</h2>
+                <div class="crud-container">
+                    <div class="form-card">
+                        <h3>Formulaire Agent</h3>
+                        <input type="text" id="agent-code" placeholder="Code (A01)" class="form-input">
+                        <input type="text" id="agent-nom" placeholder="Nom" class="form-input">
+                        <input type="text" id="agent-prenom" placeholder="Prénom" class="form-input">
+                        <select id="agent-groupe" class="form-select">
                             <option value="A">Groupe A</option>
                             <option value="B">Groupe B</option>
                             <option value="C">Groupe C</option>
                             <option value="D">Groupe D</option>
                             <option value="E">Groupe E</option>
                         </select>
-                        <button class="btn-primary" id="refresh-planning">Actualiser</button>
-                    </div>
-                </div>
-                <div id="planning-container" class="planning-grid-container"></div>
-            </section>
-
-            <!-- Gestion Agents -->
-            <section id="agents-tab" class="tab-content">
-                <div class="section-header">
-                    <h2>Gestion des Agents</h2>
-                    <div class="agent-actions">
-                        <button class="btn-primary" id="btn-add-agent">➕ Ajouter Agent</button>
-                        <button class="btn-secondary" id="btn-import-csv">📄 Importer CSV</button>
-                        <button class="btn-secondary" id="btn-export-agents">📤 Exporter</button>
-                    </div>
-                </div>
-                <div id="agents-list" class="cards-grid"></div>
-            </section>
-
-            <!-- Import Excel -->
-            <section id="import-tab" class="tab-content">
-                <div class="import-container">
-                    <div class="import-card">
-                        <div class="import-icon">📊</div>
-                        <h2>Importation Excel</h2>
-                        <p class="import-description">
-                            Importez vos fichiers Excel CleanCo pour mettre à jour la base de données
-                        </p>
-                        
-                        <div class="import-zone" id="drop-zone">
-                            <input type="file" id="file-input" accept=".xlsx,.xls,.csv" hidden>
-                            <div class="drop-area" id="drop-area">
-                                <span class="drop-icon">📁</span>
-                                <p>Glissez-déposez votre fichier Excel ici</p>
-                                <p class="drop-sub">ou</p>
-                                <button class="btn-primary" id="browse-btn">Parcourir les fichiers</button>
-                                <p class="file-types">Formats supportés: .xlsx, .xls, .csv</p>
-                            </div>
-                        </div>
-
-                        <div class="import-options">
-                            <h3>Options d'importation</h3>
-                            <div class="options-grid">
-                                <label class="option-item">
-                                    <input type="radio" name="import-type" value="agents" checked>
-                                    <span class="option-content">
-                                        <strong>Mise à jour Agents</strong>
-                                        <small>Met à jour la liste des agents</small>
-                                    </span>
-                                </label>
-                                <label class="option-item">
-                                    <input type="radio" name="import-type" value="planning">
-                                    <span class="option-content">
-                                        <strong>Planning</strong>
-                                        <small>Importe le planning mensuel</small>
-                                    </span>
-                                </label>
-                                <label class="option-item">
-                                    <input type="radio" name="import-type" value="radios">
-                                    <span class="option-content">
-                                        <strong>Matériel Radio</strong>
-                                        <small>Met à jour le parc radio</small>
-                                    </span>
-                                </label>
-                            </div>
-                        </div>
-
-                        <div class="import-progress hidden" id="import-progress">
-                            <div class="progress-bar">
-                                <div class="progress-fill" id="progress-fill"></div>
-                            </div>
-                            <div class="progress-text">
-                                <span id="progress-percent">0%</span>
-                                <span id="progress-message">Traitement en cours...</span>
-                            </div>
-                        </div>
-
-                        <div class="import-results hidden" id="import-results">
-                            <h3>Résultats de l'importation</h3>
-                            <div id="results-content"></div>
-                            <button class="btn-primary" id="close-results">Fermer</button>
+                        <div class="form-buttons">
+                            <button onclick="crudAddAgent()" class="btn btn-create">➕ Ajouter</button>
+                            <button onclick="crudUpdateAgent()" class="btn btn-update">✏️ Modifier</button>
+                            <button onclick="crudDeleteAgent()" class="btn btn-delete">🗑️ Supprimer</button>
                         </div>
                     </div>
 
-                    <div class="import-help">
-                        <h3>📋 Format Excel Requis</h3>
-                        <div class="help-content">
-                            <p>Votre fichier Excel doit contenir les colonnes suivantes :</p>
-                            <table class="format-table">
-                                <thead>
-                                    <tr><th>Colonne</th><th>Description</th><th>Exemple</th></tr>
-                                </thead>
-                                <tbody>
-                                    <tr><td>A</td><td>Code Agent</td><td>A01, B02, E01</td></tr>
-                                    <tr><td>B</td><td>Nom</td><td>DUPONT</td></tr>
-                                    <tr><td>C</td><td>Prénom</td><td>Alice</td></tr>
-                                    <tr><td>D</td><td>Groupe</td><td>A, B, C, D, E</td></tr>
-                                </tbody>
-                            </table>
-                            <p class="note">💡 Conseil : Téléchargez d'abord un <a href="#" id="download-template">modèle Excel</a></p>
+                    <div class="list-card">
+                        <h3>Liste des Agents</h3>
+                        <div id="agents-list" class="data-list">
+                            <p class="empty-state">Aucun agent (simulation)</p>
                         </div>
                     </div>
                 </div>
+                <div class="dev-log" id="crud-log"></div>
             </section>
 
-            <!-- Statistiques -->
-            <section id="stats-tab" class="tab-content">
-                <div class="stats-container">
-                    <h2>Statistiques et Rapports</h2>
-                    <div id="stats-content"></div>
+            <!-- Section IndexedDB -->
+            <section id="database-section" class="dev-section">
+                <h2>💾 IndexedDB (En développement)</h2>
+                <div class="db-controls">
+                    <button onclick="dbInit()" class="btn btn-primary">🗄️ Initialiser DB</button>
+                    <button onclick="dbAddSample()" class="btn btn-secondary">➕ Données Test</button>
+                    <button onclick="dbClear()" class="btn btn-danger">🗑️ Vider DB</button>
+                    <button onclick="dbExport()" class="btn btn-success">📤 Exporter</button>
+                </div>
+
+                <div class="db-stats">
+                    <h3>Statistiques Base</h3>
+                    <div id="db-info" class="stats-grid">
+                        <div class="stat-item">
+                            <span class="stat-label">Agents</span>
+                            <span class="stat-value" id="db-agents-count">0</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Planning</span>
+                            <span class="stat-value" id="db-planning-count">0</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Taille</span>
+                            <span class="stat-value" id="db-size">0 KB</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="db-data">
+                    <h3>Contenu Base</h3>
+                    <div id="db-content" class="code-container">
+                        // Données IndexedDB apparaîtront ici
+                    </div>
+                </div>
+                <div class="dev-log" id="db-log"></div>
+            </section>
+
+            <!-- Section Calcul Planning -->
+            <section id="planning-section" class="dev-section">
+                <h2>📅 Calcul Planning (En développement)</h2>
+                
+                <div class="planning-controls">
+                    <select id="planning-month" class="form-select">
+                        <option value="1">Janvier</option>
+                        <option value="2">Février</option>
+                        <option value="3">Mars</option>
+                        <option value="4">Avril</option>
+                        <option value="5">Mai</option>
+                        <option value="6">Juin</option>
+                        <option value="7">Juillet</option>
+                        <option value="8">Août</option>
+                        <option value="9">Septembre</option>
+                        <option value="10">Octobre</option>
+                        <option value="11">Novembre</option>
+                        <option value="12">Décembre</option>
+                    </select>
+                    <input type="number" id="planning-year" value="2024" min="2024" max="2030" class="form-input">
+                    <button onclick="calculatePlanning()" class="btn btn-primary">🧮 Calculer Planning</button>
+                </div>
+
+                <div class="planning-results">
+                    <h3>Résultats du Calcul</h3>
+                    <div id="planning-output" class="results-container">
+                        <div class="result-item">
+                            <h4>Groupe A</h4>
+                            <div class="shifts-grid" id="groupe-a-shifts"></div>
+                        </div>
+                        <div class="result-item">
+                            <h4>Groupe B</h4>
+                            <div class="shifts-grid" id="groupe-b-shifts"></div>
+                        </div>
+                        <div class="result-item">
+                            <h4>Groupe C</h4>
+                            <div class="shifts-grid" id="groupe-c-shifts"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="planning-info">
+                    <h3>Logique de Calcul</h3>
+                    <div class="code-container">
+// Cycle standard 8 jours (1,1,2,2,3,3,R,R)
+// Décalages : A=0, B=2, C=4, D=6
+// Groupe E : 5/7 (shifts 1 et 2 seulement)
+                    </div>
+                </div>
+                <div class="dev-log" id="planning-log"></div>
+            </section>
+
+            <!-- Section Tout Tester -->
+            <section id="all-section" class="dev-section">
+                <h2>🚀 Test Complet</h2>
+                <button onclick="runAllTests()" class="btn btn-large btn-success">▶️ Exécuter tous les tests</button>
+                
+                <div class="test-results" id="all-tests-results">
+                    <div class="test-item" id="test-crud">
+                        <span class="test-label">CRUD Agents</span>
+                        <span class="test-status">⏳ En attente</span>
+                    </div>
+                    <div class="test-item" id="test-db">
+                        <span class="test-label">IndexedDB</span>
+                        <span class="test-status">⏳ En attente</span>
+                    </div>
+                    <div class="test-item" id="test-planning">
+                        <span class="test-label">Calcul Planning</span>
+                        <span class="test-status">⏳ En attente</span>
+                    </div>
+                </div>
+
+                <div class="test-console">
+                    <h3>Console de Test</h3>
+                    <div id="test-console-output" class="console-output">
+                        > Prêt pour les tests...
+                    </div>
                 </div>
             </section>
         </main>
 
-        <!-- Modals -->
-        <div id="agent-modal" class="modal">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h3 id="modal-title">Nouvel Agent</h3>
-                    <button class="modal-close">&times;</button>
+        <footer class="dev-footer">
+            <div class="progress-bars">
+                <div class="progress-item">
+                    <span>CRUD Agents</span>
+                    <div class="progress-bar"><div class="progress-fill" style="width: 30%"></div></div>
                 </div>
-                <form id="agent-form">
-                    <div class="form-group">
-                        <label for="agent-code">Code Agent *</label>
-                        <input type="text" id="agent-code" required pattern="[A-Za-z0-9]{2,10}">
-                    </div>
-                    <div class="form-group">
-                        <label for="agent-nom">Nom *</label>
-                        <input type="text" id="agent-nom" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="agent-prenom">Prénom *</label>
-                        <input type="text" id="agent-prenom" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="agent-groupe">Groupe *</label>
-                        <select id="agent-groupe" required>
-                            <option value="">Sélectionner...</option>
-                            <option value="A">Groupe A</option>
-                            <option value="B">Groupe B</option>
-                            <option value="C">Groupe C</option>
-                            <option value="D">Groupe D</option>
-                            <option value="E">Groupe E</option>
-                        </select>
-                    </div>
-                    <div class="form-actions">
-                        <button type="submit" class="btn-primary">Enregistrer</button>
-                        <button type="button" class="btn-cancel">Annuler</button>
-                    </div>
-                </form>
+                <div class="progress-item">
+                    <span>IndexedDB</span>
+                    <div class="progress-bar"><div class="progress-fill" style="width: 20%"></div></div>
+                </div>
+                <div class="progress-item">
+                    <span>Calcul Planning</span>
+                    <div class="progress-bar"><div class="progress-fill" style="width: 25%"></div></div>
+                </div>
             </div>
-        </div>
-
-        <!-- Notifications -->
-        <div id="notification-center"></div>
+            <p class="version">DEV v0.3 | 📍 Votre app est sur GitHub !</p>
+        </footer>
     </div>
 
-    <!-- Bibliothèques -->
-    <script src="lib/xlsx.full.min.js"></script>
-    <script src="lib/dexie.min.js"></script>
-    
-    <!-- Application Scripts -->
-    <script src="database.js"></script>
-    <script src="excel-import.js"></script>
-    <script src="offline-manager.js"></script>
     <script src="app.js"></script>
+    <script src="database.js"></script>
+    <script src="planning.js"></script>
+    <script src="crud.js"></script>
 </body>
 </html>
